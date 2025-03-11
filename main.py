@@ -51,3 +51,8 @@ def create_posts(post:Post):
     my_posts.append(post_dict)
     # print(my_posts)
     return {"data": post_dict}
+
+@app.get("/post/{id}")
+def get_posts(id:int):
+    print(id)
+    return {f"The id is {id}"}
