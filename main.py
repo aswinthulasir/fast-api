@@ -43,6 +43,11 @@ def get_elmnt():
 #     print(new_post.dict())
 #     return {"data":"new post"}
 
+def find_post(id:int):
+    for i in my_posts:
+        if i['id']==id:
+            return i
+
 
 @app.post("/post")
 def create_posts(post:Post):
@@ -52,7 +57,20 @@ def create_posts(post:Post):
     # print(my_posts)
     return {"data": post_dict}
 
-@app.get("/post/{id}")
-def get_posts(id:int):
-    print(id)
-    return {f"The id is {id}"}
+# @app.get("/post/{id}")
+# def get_posts(id:int):
+#     print(id)
+#     return {f"The id is {id}"}
+
+
+# @app.get("/post/{id}")
+# def get_posts(id):
+#     post=find_post(int(id))
+#     print(post)
+    
+
+@app.get("/post/latest")
+def latest_post():
+    post=my_posts[len(my_posts)-1]
+    # print(post)
+    return post
