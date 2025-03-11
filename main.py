@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Response,status, HTTPException
 from fastapi.params import Body
 from pydantic import BaseModel
 from typing import Optional
@@ -63,10 +63,16 @@ def create_posts(post:Post):
 #     return {f"The id is {id}"}
 
 
-# @app.get("/post/{id}")
-# def get_posts(id):
-#     post=find_post(int(id))
-#     print(post)
+@app.get("/post/{id}")
+def get_posts(id:int, response:Response):
+    
+    post=find_post(int(id))
+    if not post:
+        raise HTTPException(status_code=status.HTTP_402_PAYMENT_REQUIRED, detail=f"Not found, go away!")
+        # response.status_code=status.HTTP_402_PAYMENT_REQUIRED
+        # return {"message":f"The thing which you are looking is not found"}
+
+    print(post)
     
 
 @app.get("/post/latest")
