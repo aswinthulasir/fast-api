@@ -80,3 +80,22 @@ def latest_post():
     post=my_posts[len(my_posts)-1]
     # print(post)
     return post
+
+def find_index_post(id: int):
+    for index, post in enumerate(my_posts):
+        if post["id"] == id:
+            return index
+    return None  # Return None if not found
+
+
+@app.put("/post/{id}")
+def update(id:int, post:Post):
+    index=find_index_post(id)
+
+    if index==None:
+        raise HTTPException(status_code=status.HTTP_402_PAYMENT_REQUIRED, detail=f"Not found, go away!")
+    
+    post_dict=post.dict()
+    post_dict['id']=id
+    my_posts[index]=post_dict
+    return {"data":post_dict}
