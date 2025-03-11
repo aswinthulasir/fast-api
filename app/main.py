@@ -35,6 +35,7 @@ def get_posts():
     cursor.execute(""" SELECT * FROM posts """)
     posts=cursor.fetchall()    
     print(posts)
+    conn.commit()
     return{"data":posts}
 
 # my_posts=[{"name":"name of first person", "company":"company of first person", "id":1 },{"name":"name of second person", "company": "company of second person", "id":2}]
