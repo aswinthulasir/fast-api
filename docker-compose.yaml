@@ -1,0 +1,20 @@
+services:
+
+  database:
+    image: postgres
+    ports:
+      - "5432:5432" 
+    restart: always
+    environment:
+      - DATABASE_NAME=fastapi_database
+      - DATABASE_USERNAME=postgres
+      - DATABASE_PASSWORD=Aswin2000
+      - SECRET_KEY=d9f5a7b2c2e7f3b1d6a9e3f1c4b7a8d2e9f6c3a5b1d7e4f8a9b3d5c7f1a2e3d
+
+  adminer:
+    image: adminer
+    restart: always
+    depends_on:
+      - database
+    ports:
+      - "8080:8080" 
