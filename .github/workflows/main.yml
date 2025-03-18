@@ -8,6 +8,10 @@ jobs:
     steps:
       - name: pulling git repo
         uses: actions/checkout@v2
-      - name: Hello World
-        run: Write-Output "Hello World"
-        shell: pwsh
+      - name: Install Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13' 
+      - run: python my_script.py
+      - name: Installing dependencies
+        run: pip install -r requirements.txt
