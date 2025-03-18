@@ -1,20 +1,24 @@
-services:
+version: '3.8'
 
+services:
   database:
     image: postgres
-    ports:
-      - "5432:5432" 
+    container_name: postgres_db
     restart: always
     environment:
-      - DATABASE_NAME=fastapi_database
-      - DATABASE_USERNAME=postgres
-      - DATABASE_PASSWORD=Aswin2000
-      - SECRET_KEY=d9f5a7b2c2e7f3b1d6a9e3f1c4b7a8d2e9f6c3a5b1d7e4f8a9b3d5c7f1a2e3d
+      POSTGRES_DB: fastapi_database
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Aswin2000
+    ports:
+      - "5432:5432"
 
   adminer:
     image: adminer
+    container_name: adminer_ui
     restart: always
     depends_on:
       - database
+    environment:
+      ADMINER_DEFAULT_SERVER: database
     ports:
-      - "8080:8080" 
+      - "8080:8080"
